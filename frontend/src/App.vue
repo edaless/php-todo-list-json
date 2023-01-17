@@ -1,10 +1,17 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+import JsonTest from './components/JsonTest.vue'
+export default {
+  name: 'App',
+  components: {
+    JsonTest
+  }
+}
 </script>
 
 <template>
+  <div>App</div>
 
-  <HelloWorld msg="Vite + Vue" />
+  <JsonTest />
 </template>
 
 <style scoped>

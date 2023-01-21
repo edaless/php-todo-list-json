@@ -30,6 +30,7 @@ export default {
       // "e" è l'evento del click
       // la funzione previene che la pagina si ricarchi di default
 
+      // if che evita di aggiungere righe vuote per sbaglio
       if (this.newTodoText != "") {
 
 
@@ -77,7 +78,7 @@ export default {
   <div class="container">
     <h1>todoList</h1>
     <ul>
-      <li v-for="(todoElem, ind) in todoList" :key="ind">
+      <li v-for="(todoElem, ind) in todoList" :key="ind" :class="todoElem.completed === true ? 'barrato' : ''">
         {{ todoElem.text }}
       </li>
     </ul>
@@ -122,6 +123,11 @@ li {
 
 li:last-child {
   margin-bottom: 10px;
+}
+
+.barrato {
+  text-decoration: line-through;
+
 }
 
 /* form {

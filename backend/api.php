@@ -1,6 +1,7 @@
 <?php
 // corse policy
-header("Access-Control-Allow-Origin: http://localhost:5174");
+header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Originn: http://localhost:5174");
 header("Access-Control-Allow-Headers: X-Requested-With");
 
 
@@ -8,29 +9,11 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 header('Content-Type: application/json');
 
 
+$jsonTodoList = file_get_contents("todo.json", true);
 
-$testObj = [
-    [
-        "text" => "Obj1",
-        "valore" => 2000
-    ],
-    [
-        "text" => "Obj2",
-        "valore" => 3000
-    ],
-    [
-        "text" => "Obj3",
-        "valore" => 3300
-    ],
-    [
-        "text" => "Obj4",
-        "valore" => 3400
-    ],
-    [
-        "text" => "emanuele",
-        "valore" => "d'alessandro"
-    ]
-];
+// questo non serve perché la stringa è già in json
+// $todoList = json_decode($jsonTodoList);
 
 
-echo json_encode($testObj);
+
+echo $jsonTodoList;

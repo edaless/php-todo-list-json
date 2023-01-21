@@ -1,17 +1,23 @@
 <script>
-import JsonTest from './components/JsonTest.vue'
+import todoList from './components/todoList.vue'
+
 export default {
   name: 'App',
   components: {
-    JsonTest
+    todoList
+
   }
 }
 </script>
 
 <template>
-  <div>App</div>
 
-  <JsonTest />
+
+  <todoList />
+
+
+
+
 </template>
 
 <style scoped>

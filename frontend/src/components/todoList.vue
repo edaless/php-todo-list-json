@@ -47,6 +47,7 @@ export default {
         // faccio una chiamata all'api che crea new tasks, e le passo i params che sono
         // la copia del v-model collegato all'input (newTodoText)
         axios.get(API_URL + "api_create_new_task.php", params)
+          // questo then è inutile?
           .then(res => {
 
             const data = res.data;
@@ -62,12 +63,43 @@ export default {
         // chiamo di nuovo tutti i dati
         this.getAllData();
       };
+    },
+    deleteTask(index) {
+      const params = {
+        params: {
+          "index": index
+        }
+      };
+
+      // faccio una chiamata all'api che elimina tasks, e le passo il param che è
+      // l'indice della task da eliminare
+      axios.get(API_URL + "api_delete_task.php", params);
+
+
+      // chiamo di nuovo tutti i dati
+      this.getAllData();
     }
   },
-  mounted() {
-    this.getAllData();
+  rendiFatto(index) {
+    const params = {
+      params: {
+        "index": index
+      }
+    };
 
+    // faccio una chiamata all'api che rende fatto il task, e le passo il param che è
+    // l'indice della task da rendere fatta
+    axios.get(API_URL + "api_delete_task.php", params);
+
+
+    // chiamo di nuovo tutti i dati
+    this.getAllData();
   }
+},
+mounted() {
+  this.getAllData();
+
+}
 
 
 
@@ -78,8 +110,12 @@ export default {
   <div class="container">
     <h1>todoList</h1>
     <ul>
-      <li v-for="(todoElem, ind) in todoList" :key="ind" :class="todoElem.completed === true ? 'barrato' : ''">
+      <li v-for="(todoElem, ind) in todoList" :key="ind" :class="todoElem.completed === true ? 'barrato' : ''"
+        @click="rendiFatto(ind)">
         {{ todoElem.text }}
+        <div @click.stop="deleteTask(ind)">
+          <i class="fa-solid fa-trash"></i>
+        </div>
       </li>
     </ul>
     <form @submit="createNewTask">
@@ -92,7 +128,7 @@ export default {
 
 
 
-<style scoped>
+<style lang="scss" scoped>
 .container {
   width: 100%;
   min-height: 100vh;
@@ -116,14 +152,48 @@ ul {
 }
 
 li {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
   list-style: none;
   /* background-color: red; */
   margin-top: 10px;
+  padding: 5px;
+  border-radius: 5px;
+
+  &:last-child {
+    margin-bottom: 10px;
+  }
+
+  &:hover {
+    background-color: rgb(230, 249, 230);
+  }
+
+  div {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    border-radius: 3px;
+    // background-color: aqua;
+
+
+    &:hover {
+      background-color: rgb(186, 186, 186);
+    }
+
+    i {
+      font-size: 10px;
+      color: black;
+
+    }
+
+
+  }
 }
 
-li:last-child {
-  margin-bottom: 10px;
-}
 
 .barrato {
   text-decoration: line-through;
